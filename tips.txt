@@ -1,0 +1,5 @@
+1. Always keep a pen and a notebook
+2. understand the problem.
+3. Handle the edge cases.
+4. go with the intution
+
