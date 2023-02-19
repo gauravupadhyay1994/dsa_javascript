@@ -1,3 +1,5 @@
+// the big O complexity of both of them is O(V+E) where V is the vertices and E is the edge
+
 const airports = "A B C D E F G H I J K".split(" ");
 const routes = [
   ["A", "C"],
@@ -44,4 +46,19 @@ function bfs(start) {
   }
 }
 
-bfs("K");
+function dfs(start, visited = new Set()) {
+  visited.add(start);
+  const destinations = adjacencyList.get(start);
+  for (const destination of destinations) {
+    if (destination === "C") {
+      console.log("found");
+      return;
+    }
+    if (!visited.has(destination)) {
+      dfs(destination, visited);
+    }
+  }
+}
+
+// bfs("K");
+// dfs("J");
