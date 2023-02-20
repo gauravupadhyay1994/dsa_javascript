@@ -1,4 +1,4 @@
-// the big O complexity of both of them is O(V+E) where V is the vertices and E is the edge
+// the big O complexity of both of them is O(V+E) where V is the vertices and E is the edge --- in other words it will scale linear
 
 const airports = "A B C D E F G H I J K".split(" ");
 const routes = [
