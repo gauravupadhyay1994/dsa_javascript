@@ -1,50 +1,47 @@
-class PriorityQueue {
+// first in first out (FIFO)
+class Queue {
   constructor() {
-    this.queue = [];
+    this.items = [];
   }
 
   enqueue(element) {
-    if (this.isEmpty()) {
-      this.queue.push(element);
-    } else {
-      let added = false;
-      for (let i = 0; i < this.queue.length; i++) {
-        if (element.priority < this.queue[i].priority) {
-          this.queue.splice(i, 0, element);
-          added = true;
-          break;
-        }
-      }
-      if (!added) {
-        this.queue.push(element);
-      }
-    }
+    this.items.push(element);
   }
 
   dequeue() {
-    return this.queue.shift();
+    return this.items.shift();
   }
-
   isEmpty() {
-    return this.queue.length === 0;
+    return this.items.length === 0;
+  }
+  peek() {
+    if (!this.isEmpty()) {
+      return this.items[0];
+    }
+    return null;
+  }
+
+  size() {
+    return this.items.length;
+  }
+
+  print() {
+    console.log(this.items.toString());
   }
 }
 
-// for enqueing in O(logn) time
-function enqueue(element) {
-  if (this.isEmpty()) {
-    this.queue.push(element);
-  } else {
-    let left = 0;
-    let right = this.queue.length - 1;
-    while (left <= right) {
-      let mid = Math.floor((left + right) / 2);
-      if (element.priority < this.queue[mid].priority) {
-        right = mid - 1;
-      } else {
-        left = mid + 1;
-      }
-    }
-    this.queue.splice(left, 0, element);
-  }
-}
+const queue = new Queue();
+
+queue.enqueue(5);
+queue.enqueue(6);
+queue.enqueue(7);
+queue.enqueue(8);
+
+console.log(queue.isEmpty());
+console.log(queue.peek());
+console.log(queue.size());
+queue.print();
+queue.dequeue();
+queue.print();
+queue.enqueue(12);
+queue.print();
