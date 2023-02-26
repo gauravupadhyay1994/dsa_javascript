@@ -4,7 +4,7 @@ class Node {
     this.next = null;
   }
 }
-class LinkedList {
+export class LinkedList {
   constructor() {
     this.head = null;
     this.tail = null;
@@ -67,7 +67,7 @@ class LinkedList {
       this.tail = node;
     }
   }
-  remove(index) {
+  removeFrom(index) {
     if (index < 0 || this.getSize() < index) {
       return;
     }
@@ -88,6 +88,58 @@ class LinkedList {
     }
     this.size--;
   }
+
+  search(value) {
+    if (this.isEmpty()) {
+      return -1;
+    }
+    let index = 0;
+    let curr = this.head;
+    while (curr && curr.value != value) {
+      index++;
+      curr = curr.next;
+    }
+    if (this.getSize() === index) {
+      return -1;
+    }
+    return index;
+  }
+  removeValue(value) {
+    if (this.isEmpty()) {
+      return;
+    }
+    if (this.head.value === value) {
+      value = this.head.value;
+      this.head = this.head.next;
+      if (this.getSize() === 1) {
+        this.tail = null;
+      }
+      this.size--;
+      return value;
+    }
+    let curr = this.head;
+    let prev = null;
+    let size = 1;
+    while (curr && curr.value != value) {
+      size++;
+      prev = curr;
+      curr = curr.next;
+    }
+    if (!prev) {
+      return;
+    }
+
+    if (this.getSize() === size) {
+      console.log("Size: ", size, " getSize ", this.getSize());
+
+      this.tail = prev;
+      prev.next = null;
+      this.size--;
+      return;
+    }
+    prev.next = curr.next;
+    this.size--;
+  }
   print() {
     if (this.isEmpty()) {
       console.log("this list is empty");
@@ -99,6 +151,22 @@ class LinkedList {
         curr = curr.next;
       }
       console.log(listvalues);
+    }
+  }
+  reverse() {
+    if (this.isEmpty()) {
+      return;
+    }
+    this.tail = this.head;
+    let prev = null;
+    let next = this.head.next;
+    let curr = this.head;
+    while (curr) {
+      curr.next = prev;
+      prev = curr;
+      this.head = curr;
+      curr = next;
+      if (curr) next = next.next;
     }
   }
 }
@@ -120,7 +188,12 @@ console.log("Is list empty? ", list.isEmpty());
 console.log("Size of the list ", list.getSize());
 list.print();
 
-list.remove(3);
+list.removeFrom(3);
 list.print();
-list.remove(5);
+list.removeFrom(5);
+list.print();
+list.removeValue(40);
+list.print();
+console.log(list.search(100));
+list.reverse();
 list.print();
